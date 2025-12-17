@@ -40,12 +40,15 @@ async def get_employees(db: Session = Depends(get_db)):
     
     return employees_query
 
+
 @router.get("/{id}")
 async def employee(id:int , db:Session = Depends(get_db)):
-
     employee_query = db.query(models.EmployeeRegister).filter(models.EmployeeRegister.id == id)
     employee_results = employee_query.first()
 
-    if employee_results != None:
-        raise HTTPException()
-    
+    if employee_results == None:
+
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND , detail="Not Found")
+
+    else:
+        return employee_results
