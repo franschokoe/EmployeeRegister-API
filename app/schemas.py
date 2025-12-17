@@ -2,6 +2,8 @@ from pydantic import BaseModel , EmailStr
 from typing import List
 from datetime import datetime
 
+from sqlalchemy import DATETIME
+
 
 """CREATE EMPLOYEE"""
 
@@ -14,3 +16,11 @@ class EmployeeRes(CreateEmployee):
     id:int
     class Config:
         from_attribute = True
+
+"""ADDING ROLES"""
+
+class CreateRoles(BaseModel):
+    id:int
+    position: str
+    started_at : datetime
+    earning: int
