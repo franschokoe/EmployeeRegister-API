@@ -6,7 +6,7 @@ from datetime import datetime
 """CREATE EMPLOYEE"""
 
 class CreateEmployee(BaseModel):
-    first_name: str
+    firstname: str
     age: int
     created_at: datetime
 
