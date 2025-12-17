@@ -52,3 +52,23 @@ async def employee(id:int , db:Session = Depends(get_db)):
 
     else:
         return employee_results
+    
+
+@router.delete("/{id}")
+async def remove_employee(id: int , db: Session= Depends(get_db)):
+
+    employee_query = db.query(models.EmployeeRegister).filter(models.EmployeeRegister.id == id)
+
+    employee_results = employee_query.first()
+
+    if employee_results != None:
+
+        db.delete(employee_results)
+        db.commit()
+        db.close()
+
+        return {"data" : f"employee {id} deleted"}
+    
+    else:
+        raise HTTPException(status_code=404 , detail=f"User {id} Not Found")
+    

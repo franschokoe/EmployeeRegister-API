@@ -8,7 +8,7 @@ class EmployeeRegister(Base):
     __tablename__ = "employees"    
     # columns
     id = Column(Integer , nullable=False , primary_key=True , index=True)
-    first_name = Column(String , nullable=False)
+    firstname = Column(String , nullable=False)
     age = Column(Integer , nullable=False)
     created_at = Column(TIMESTAMP(timezone=False) , server_default=text("NOW()"))
     
