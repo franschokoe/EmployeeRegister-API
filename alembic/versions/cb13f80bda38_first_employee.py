@@ -31,10 +31,4 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     """Downgrade schema."""
-    op.drop_table("employees"   ,
-                                    sa.Column("id" ,sa.Integer() , primary_key=True , nullable=False),
-                                    sa.Column("firstname" , sa.String(), nullable=False),
-                                    sa.Column("age", sa.Integer() , nullable=False),
-                                    sa.Column("created_at" , sa.TIMESTAMP(timezone=True) , server_default=sa.text("now()") , nullable=False , autoincrement=False),
-                                    sa.PrimaryKeyConstraint("id"),
-                                    )
+    op.drop_table("employees")
