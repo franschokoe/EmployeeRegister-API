@@ -10,4 +10,16 @@ router = APIRouter(
 
 @router.post("/")
 async def create_role(role:schemas.CreateRoles , db: Session = Depends(get_db)):
-    pass
+
+    role_query = models.EmployeeRole(**role.dict())
+
+    if role_query !=None:
+        db.add(role_query)
+        db.commit()
+        db.refresh(role_query)
+
+        return role_query
+
+    else:
+        raise HTTPException(status_code=status.HTTP_204_NO_CONTENT , detail="Nothing to create") 
+      
