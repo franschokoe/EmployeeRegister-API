@@ -24,3 +24,4 @@ class CreateRoles(BaseModel):
     position: str
     started_at : datetime
     earning: int
+    owner_id: int
