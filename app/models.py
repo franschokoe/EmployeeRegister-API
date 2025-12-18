@@ -22,5 +22,5 @@ class EmployeeRole(Base):
     position = Column(String , nullable=False)
     started_at = Column(TIMESTAMP(timezone=True) , nullable=False , server_default=text("now()"))
     earning = Column(Integer , nullable=False)
-    owner_id = Column(Integer , ForeignKey("employees.id" , ondelete="CASCADE") , nullable=False)
-    owner = relationship("employees")
+    owner_id = Column(Integer , ForeignKey("employees.id" , ondelete="CASCADE") , nullable=True)
+    owner = relationship("EmployeeRegister")
