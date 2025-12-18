@@ -20,7 +20,6 @@ class EmployeeRes(CreateEmployee):
 """ADDING ROLES"""
 
 class CreateRoles(BaseModel):
-    id:int
     position: str
     started_at : datetime
     earning: int
