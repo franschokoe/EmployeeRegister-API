@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter , Depends , status , HTTPException
 from sqlalchemy.orm import Session
 from .. import models , schemas
@@ -23,3 +24,6 @@ async def create_role(role:schemas.CreateRoles , db: Session = Depends(get_db)):
     else:
         raise HTTPException(status_code=status.HTTP_204_NO_CONTENT , detail="Nothing to create") 
       
+@router.get("/" , response_model=List[schemas.RoleResponse])
+async def get_role():
+    pass
