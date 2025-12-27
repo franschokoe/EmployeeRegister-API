@@ -24,3 +24,11 @@ class CreateRoles(BaseModel):
     started_at : datetime
     earning: int
     owner_id: int
+
+class RoleResponse(BaseModel):
+    position: str
+    started_at: datetime
+    owner_id:int
+
+    class Config:
+        from_attribute = True
