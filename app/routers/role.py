@@ -33,7 +33,7 @@ async def get_roles(db:Session = Depends(get_db)):
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND , detail="Roles not found")
 
-@router.get('/{id}')
+@router.get('/{id}' , response_model=schemas.IndividualRole)
 async def get_role(id:int , db: Session=Depends(get_db)):
     role_query = db.query(models.EmployeeRole).filter(models.EmployeeRole.id == id)
     results = role_query.first()
