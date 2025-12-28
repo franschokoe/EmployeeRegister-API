@@ -37,3 +37,8 @@ async def get_roles(db:Session = Depends(get_db)):
 async def get_role(id:int , db: Session=Depends(get_db)):
     role_query = db.query(models.EmployeeRole).filter(models.EmployeeRole.id == id)
     results = role_query.first()
+
+    if results == None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND , detail="Role note found")
+    
+    return results
