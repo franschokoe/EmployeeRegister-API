@@ -32,3 +32,11 @@ class RoleResponse(BaseModel):
 
     class Config:
         from_attribute = True
+
+class IndividualRole(BaseModel):
+    position:str
+    earning: int
+    started_at: datetime
+
+    class Config:
+        from_attribute = True
