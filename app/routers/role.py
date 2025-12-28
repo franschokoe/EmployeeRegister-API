@@ -25,11 +25,13 @@ async def create_role(role:schemas.CreateRoles , db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_204_NO_CONTENT , detail="Nothing to create") 
       
 @router.get("/" , response_model=List[schemas.RoleResponse])
-async def get_role(db:Session = Depends(get_db)):
+async def get_roles(db:Session = Depends(get_db)):
     roles_query = db.query(models.EmployeeRole).all()
     
     if roles_query != None:
         return roles_query
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND , detail="Roles not found")
-    
+
+@router.get('/{id}')
+async def get_role(id:int , db: Session=Depends(get_db))
