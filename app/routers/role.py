@@ -42,3 +42,7 @@ async def get_role(id:int , db: Session=Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND , detail="Role note found")
     
     return results
+
+@router.delete('/{id}')
+async def delete_role(id: int , db:Session=Depends(get_db)):
+    pass
