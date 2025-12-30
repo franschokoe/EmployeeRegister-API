@@ -45,4 +45,5 @@ async def get_role(id:int , db: Session=Depends(get_db)):
 
 @router.delete('/{id}')
 async def delete_role(id: int , db:Session=Depends(get_db)):
-    pass
+    delete_query = db.query(models.EmployeeRole).filter(models.EmployeeRole.id == id).first()
+    
