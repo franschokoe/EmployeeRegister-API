@@ -45,5 +45,12 @@ async def get_role(id:int , db: Session=Depends(get_db)):
 
 @router.delete('/{id}')
 async def delete_role(id: int , db:Session=Depends(get_db)):
-    delete_query = db.query(models.EmployeeRole).filter(models.EmployeeRole.id == id).first()
-    
+
+    delete_query = db.query(models.EmployeeRole).filter(models.EmployeeRole.id == id)
+
+    if delete_query.first() != None:
+        db.delete(delete_query)
+        db.commit()
+        db.close()
+
+        raise HTTPException(status_code=status.HTTP_200_OK , detail="Role deleted")
