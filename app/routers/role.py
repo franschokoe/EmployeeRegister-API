@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import APIRouter , Depends , status , HTTPException
+from fastapi import APIRouter , Depends, Response , status , HTTPException
 from sqlalchemy.orm import Session
 from .. import models , schemas
 from ..database import get_db
@@ -47,10 +47,15 @@ async def get_role(id:int , db: Session=Depends(get_db)):
 async def delete_role(id: int , db:Session=Depends(get_db)):
 
     delete_query = db.query(models.EmployeeRole).filter(models.EmployeeRole.id == id)
+    results = delete_query.first()
 
-    if delete_query.first() != None:
-        db.delete(delete_query)
+    if results != None:
+        db.delete(results)
         db.commit()
         db.close()
 
-        raise HTTPException(status_code=status.HTTP_200_OK , detail="Role deleted")
+        return Response(status_code=status.HTTP_404_NOT_FOUND)
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND , detail=f"Id {id} not found")
+    
+    
